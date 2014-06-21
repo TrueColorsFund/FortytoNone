@@ -1,0 +1,45 @@
+body {
+  font: normal 13px/1.5em Helvetica,arial,sans-serif;
+  color: gray;
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul#nav li {
+
+}
+
+.icon {
+  text-indent: -9999px;
+  background: url(../img/sprite.png) no-repeat 0 0;
+  width: 132px;
+  height: 170px;
+}
+
+.icon.shelter {
+  background-position: -220px -228px;
+}
+
+.icon.restroom {
+  background-position: -220px -228px;
+}
+
+.icon.food {
+  background-position: -220px -228px;
+}
+
+.icon.power {
+  background-position: -220px -228px;
+}
+
+.icon.wifi {
+  background-position: -220px -228px;
+}
+
+.icon.advice {
+  background-position: -220px -228px;
+}
+
+

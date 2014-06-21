@@ -8,7 +8,8 @@ require "sinatra/reloader"
 # puts "What city are you in?"
 # city = gets.chomp
 
-get "/search_bathrooms" do
+get "/search_bathrooms.json" do
+  content_type :json
   if params[:lat]
     lat = params[:lat]
     long = params[:long]
@@ -20,14 +21,23 @@ get "/search_bathrooms" do
   page = Nokogiri::HTML(open(url))
   jace = {latitude: lat, longitude: long, bathrooms: []}
   page.css(".listItem").each do |item|
+    given_location = item.search(".itemStreet").text
+    loc = Nokogiri::HTML(open("https://maps.googleapis.com/maps/api/geocode/json?address=#{given_location.gsub(" ", "+")}&key=AIzaSyBCuzH2kGD5AyZwTVtEz2v0evKk8pr3IV8"))
+    if loc["results"]
+      lat_long = loc["results"]["geometry"]["location"]
+    else
+      lat_long = {"lat" => nil, "lng" => nil}
+    end
     item_json = {
       name: item.search(".itemName").text,
-      location: item.search(".itemStreet").text,
+      location: given_location,
       rating: item.search(".itemRating").text,
       accessible: !item["class"].include?("not_accessible"),
       unisex: !item["class"].include?("not_unisex"),
       paid: true,
-      welcoming: false
+      welcoming: false,
+      latitude: lat_long["lat"],
+      longitude: lat_long["lng"]
     }
     jace[:bathrooms] << item_json
   end

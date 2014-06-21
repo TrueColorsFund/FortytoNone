@@ -31,7 +31,8 @@ get "/search_bathrooms.json" do
   jace = {latitude: lat, longitude: long, bathrooms: []}
   page.css(".listItem").each do |item|
     given_location = item.search(".itemStreet").text
-    loc = Nokogiri::HTML(open("https://maps.googleapis.com/maps/api/geocode/json?address=#{given_location.gsub(" ", "+")}&key=AIzaSyBCuzH2kGD5AyZwTVtEz2v0evKk8pr3IV8"))
+    loc_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{given_location.gsub(" ", "+")}&key=AIzaSyBCuzH2kGD5AyZwTVtEz2v0evKk8pr3IV8"
+    loc = Nokogiri::HTML(open(loc_url))
     if loc["results"]
       lat_long = loc["results"]["geometry"]["location"]
     else

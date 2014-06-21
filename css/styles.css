@@ -1,6 +1,11 @@
 body {
   font: normal 13px/1.5em Helvetica,arial,sans-serif;
   color: gray;
+
+}
+
+h1 {
+  text-align: center;
 }
 
 ul {
@@ -20,6 +25,7 @@ ul#nav li {
 
 .icon.shelter {
   background-position: -220px -228px;
+  float: left;
 }
 
 .icon.restroom {

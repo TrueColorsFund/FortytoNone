@@ -14,32 +14,32 @@ ul#nav li {
 .icon {
   text-indent: -9999px;
   background: url(../img/sprite.png) no-repeat 0 0;
-  width: 132px;
+  width: 146px;
   height: 170px;
 }
 
 .icon.shelter {
-  background-position: -220px -228px;
+  background-position: -214px -228px;
 }
 
 .icon.restroom {
-  background-position: -220px -228px;
+  background-position: -376px -228px;
 }
 
 .icon.food {
-  background-position: -220px -228px;
+  background-position: -214px -40px;
 }
 
 .icon.power {
-  background-position: -220px -228px;
+  background-position: -32px -228px;
 }
 
 .icon.wifi {
-  background-position: -220px -228px;
+  background-position: -32px -40px;
 }
 
 .icon.advice {
-  background-position: -220px -228px;
+  background-position: -376px -40px;
 }
 
 

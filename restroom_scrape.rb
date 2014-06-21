@@ -10,13 +10,27 @@ require "sinatra/reloader"
 # city = gets.chomp
 
 get "/" do
-  city = params[:city].gsub(" ", "+")
-  state = params[:state].gsub(" ", "+")
-
-  page = Nokogiri::HTML(open("http://www.refugerestrooms.org/restrooms?lat=40.7127837&long=-74.00594130000002&page=2&search=#{city}%2C+#{state}%2C+United+States&utf8=%E2%9C%93"))
-  jace =[]
-  page.css(".itemName").each do |item|
-    jace << item.text
+  if params[:lat]
+    lat = params[:lat]
+    long = params[:long]
+  else
+    lat = 40.7127837
+    long = -74.00594130000002
+  end
+  url = "http://www.refugerestrooms.org/restrooms?search=current+location&lat=#{lat}&long=#{long}&page=1"
+  page = Nokogiri::HTML(open(url))
+  jace = {latitude: lat, longitude: long, bathrooms: []}
+  page.css(".listItem").each do |item|
+    item_json = {
+      name: item.search(".itemName").text,
+      location: item.search(".itemStreet").text,
+      rating: item.search(".itemRating").text,
+      accessible: !item["class"].include?("not_accessible"),
+      unisex: !item["class"].include?("not_unisex"),
+      paid: true,
+      welcoming: false
+    }
+    jace[:bathrooms] << item_json
   end
   jace.to_json
 end

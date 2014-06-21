@@ -1,7 +1,6 @@
 require "nokogiri"
 require "open-uri"
 require "json"
-require "pry"
 require "sinatra"
 require "sinatra/reloader"
 # puts "What state are you in?"
@@ -9,7 +8,7 @@ require "sinatra/reloader"
 # puts "What city are you in?"
 # city = gets.chomp
 
-get "/" do
+get "/search_bathrooms" do
   if params[:lat]
     lat = params[:lat]
     long = params[:long]
@@ -33,7 +32,4 @@ get "/" do
     jace[:bathrooms] << item_json
   end
   jace.to_json
-end
-get "/index" do
-  "<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>"
 end

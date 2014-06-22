@@ -1,0 +1,14 @@
+#results{
+	border: 1px solid red;
+}
+html { height: 100% }
+body { height: 100%; margin: 0; padding: 0 }
+#map-canvas { height: 100% }
+#loading{
+	display:block;
+	margin:10px auto;
+}
+/* google maps info window */
+.gm-style-iw{
+	width:auto !important;
+}
